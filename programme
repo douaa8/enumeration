@@ -13,7 +13,7 @@ public class Chef_Atelier extends Personne {
    LocalDate dateExperience;
    LocalDate datePromotion;
    Statut statut;
-   int i=0;
+   
     public Chef_Atelier( String nom ,String prenom , String email , String login , String password , int nbExperience , LocalDate dateExperience , LocalDate datePromotion ,Statut statut) {
     	super(nom,prenom,email,login,password);
     	this.nbExperience = nbExperience;
