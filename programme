@@ -1,0 +1,190 @@
+package tp3_enu;
+//Enum Statut
+public enum Statut {
+ Active ,Suspendue,Radie,Neant;
+}
+//class chef_Atelier
+import java.time.LocalDate;
+import java.time.Year;
+
+
+public class Chef_Atelier extends Personne {
+   int nbExperience ;
+   LocalDate dateExperience;
+   LocalDate datePromotion;
+   Statut statut;
+   int i=0;
+    public Chef_Atelier( String nom ,String prenom , String email , String login , String password , int nbExperience , LocalDate dateExperience , LocalDate datePromotion ,Statut statut) {
+    	super(nom,prenom,email,login,password);
+    	this.nbExperience = nbExperience;
+    	this.dateExperience=dateExperience;
+    	this.datePromotion=datePromotion;
+    	this.statut=statut;
+    }
+  
+  
+   public String toString() {
+	   return (super.toString() + "\n"+ nbExperience + "\n"+ datePromotion + "\n"+statut) ;
+   }
+   public void afficher ( ) {
+		  System.out.println( "les information du chef atelier sont :\n" + toString()  );
+	 }
+   public int AjourExperience ( LocalDate dateExperience ) {
+	    
+		   return (Year.now().getValue()- dateExperience.getYear());
+	     
+	    	
+}
+}
+// Enum Specialite
+public enum Specialite {
+Electronique,Informatique,Mecanique,Rien;
+}
+
+//Class Technicien
+public class Technicien extends Personne{
+  int matricule;
+  Specialite specialite ;
+  
+ public Technicien() {}
+ public Technicien (String nom, String prenom ,String email , String login , String password , int matricule ,  Specialite specialite  ) {
+	  super(nom,prenom,email,login,password);
+	  this.matricule=matricule;
+	  this.specialite= specialite; 
+ }
+ 
+ public String toString() {
+	   return (super.toString() +"\n"+ matricule+"\n" +specialite) ;
+ }
+ public void afficher ( ) {
+	  System.out.println( "les information du technicien sont :\n" +  toString()  );
+ }
+}
+// Class Personne
+ import  java.util.Scanner;
+public class Personne {
+  String nom;
+  String prenom;
+  String email;
+  String login;
+   protected String password;
+   
+  public Personne() {}
+  public Personne (String nom , String prenom , String email , String login ,String password) {
+	  this.nom=nom;
+	  this.prenom=prenom;
+	  this.email=email;
+	  this.login=login;
+	  this.password=password;
+  }
+  Scanner sc =  new Scanner(System.in);
+  public String toString() {
+	  return (nom +"\n"+ prenom +"\n"+ email +"\n"+ login +"\n"+ password);
+  }
+  public  void afficher () {
+	  System.out.println("les information de la personne :" + toString());
+  }
+  // methode de la class mere a la class fille super.NomDeLaClass;
+  public boolean sauthentifier1 () {
+	  System.out.println("donner le nom d utitisateur et le password");
+	  
+	    String log =sc.nextLine();
+	    String pass = sc.nextLine();
+	    
+	  if (log.equals(login) && pass.equals(password) ) {
+		  return (true);
+	  }else 
+		  return (false);
+	  
+	  
+  }
+  public boolean sauthentifier2 () {
+	  int ess=0;
+	  do {
+		  System.out.println("donner le nom d utitisateur et le password");
+		  
+		    String log =sc.nextLine();
+		    String pass = sc.nextLine();
+		    
+		  if (log.equals(login) && pass.equals(password)) {
+			  return (true);
+		  }else {
+			  System.out.println( "tu n a pas ete authentifier essai une autre fois");
+		  ess=ess+1;}
+	  }while(ess<3);
+	  return (false);
+  }
+}
+//Main 
+import java .time.LocalDate;
+import java.util.Scanner;
+public class Programme {
+
+	public static void main(String[] args) {
+		Scanner sc =  new Scanner(System.in);
+		System.out.println("donnez un caractere  pour verifier que tu n est pas un robot");
+		  sc.nextLine();
+		
+	
+		String p = null;
+		do {
+		System.out.println("chaisir entre 1 et 0 : \n 1 si technicien \n 0 si chef atelier");
+		 
+		 int i = sc.nextInt();
+		 sc.nextLine(); 
+    switch (i) { 
+    
+    case 1:
+        Technicien tec = new Technicien(
+            "karima", "bouibene", "karima@example.com", "lamo", "25skkk", 
+            31468911, Specialite.Informatique);
+        
+        System.out.println("Veuillez vous authentifier.");
+        
+        if (tec.sauthentifier1()==true) {
+            System.out.println("Authentification réussie!");
+            tec.afficher();
+        } else {
+            System.out.println("Echec de l'authentification. Veuillez réessayer.");
+            if (tec.sauthentifier2()==true) {
+                System.out.println("Authentification réussie à la seconde tentative !");
+                tec.afficher();
+            } else {
+                System.out.println("Echec de l'authentification après trois tentatives.");
+            }
+        }
+        System.out.println("donnez un caractere differant de a pour continuer \n");
+          p=sc.nextLine();
+        break;
+    case 0:
+     Chef_Atelier  chef = new Chef_Atelier("yousef","kami" , "kamiyoun@gmail.com" ,"youna","11204bjh",1,LocalDate.of(2020, 6,20),LocalDate.of(2023,1, 5) ,Statut.Active);
+        
+		 	
+		 	 System.out.println("Veuillez vous authentifier.");
+		        
+		        if (chef.sauthentifier1()==true) {
+		            System.out.println("Authentification réussie!");
+		            chef.afficher();
+		        } else {
+		            System.out.println("Echec de l'authentification. Veuillez réessayer.");
+		            if (chef.sauthentifier2()==true) {
+		                System.out.println("Authentification réussie à la seconde tentative !");
+		                chef.afficher();
+		            } else {
+		                System.out.println("Echec de l'authentification après trois tentatives.");
+		            }
+		        }
+		       
+		        
+		  System.out.println( "le nombre d experionce est " + chef.AjourExperience(LocalDate.of(2020, 6,20)));
+		  System.out.println("donnez un caractere differant de a pour continuer \n");
+		  p = sc.nextLine();
+	break;
+	}
+   
+		}while(p.equals("a"));
+}
+}
+
+
+
