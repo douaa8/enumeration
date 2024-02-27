@@ -182,7 +182,7 @@ public class Programme {
 	break;
 	}
    
-		}while(p.equals("a"));
+		}while(!p.equals("a"));
 }
 }
 
